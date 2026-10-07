@@ -25,7 +25,7 @@
       <section class="hero" aria-labelledby="hero-title">
         <p class="eyebrow reveal">Wedding Invitation</p>
         <h1 id="hero-title" class="hero-names reveal">
-          <span>전윤호</span><span class="heart" aria-label="하트">&#9829;</span><span>이수정</span>
+          <span>전윤호</span><span class="heart" aria-label="하트">♥</span><span>이수정</span>
         </h1>
         <div class="hero-photo reveal">
           <img src="./assets/illustration.jpg" alt="신랑과 신부가 나란히 선 웨딩 일러스트" fetchpriority="high" decoding="async" />
@@ -78,12 +78,28 @@
       <section class="section account-section" aria-labelledby="account-title">
         <p class="section-kicker reveal">Account</p>
         <h2 id="account-title" class="section-title reveal">마음 전하실 곳</h2>
-        <p class="section-subtitle reveal">양가 계좌 안내를 이곳에 담을 예정입니다.</p>
+        <p class="section-subtitle reveal">확인된 계좌부터 안내드립니다.</p>
         <div class="account-groups">
           <div class="account-group reveal" data-account-side="groom">
             <h3>신랑측</h3>
-            <p>계좌 정보 준비 중</p>
-            <div class="account-list" data-account-list="groom"></div>
+            <div class="account-list" data-account-list="groom">
+              <div class="account-person">
+                <div class="account-person-header"><strong>신랑 전윤호</strong><button type="button" class="account-toggle" data-account-toggle aria-controls="account-groom" aria-expanded="false">계좌 보기</button></div>
+                <div class="account-details" id="account-groom" hidden>
+                  <p>카카오뱅크 · 예금주 전윤호</p>
+                  <p class="account-number">3333-07-8793952</p>
+                  <button type="button" class="account-copy" data-copy-account="3333-07-8793952">계좌번호 복사하기</button>
+                </div>
+              </div>
+              <div class="account-person">
+                <div class="account-person-header"><strong>아버지 전성우</strong><button type="button" class="account-toggle" data-account-toggle aria-controls="account-groom-father" aria-expanded="false">계좌 보기</button></div>
+                <div class="account-details" id="account-groom-father" hidden><p>계좌 정보 준비 중</p></div>
+              </div>
+              <div class="account-person">
+                <div class="account-person-header"><strong>어머니 강정일</strong><button type="button" class="account-toggle" data-account-toggle aria-controls="account-groom-mother" aria-expanded="false">계좌 보기</button></div>
+                <div class="account-details" id="account-groom-mother" hidden><p>계좌 정보 준비 중</p></div>
+              </div>
+            </div>
           </div>
           <div class="account-group reveal" data-account-side="bride">
             <h3>신부측</h3>
@@ -94,7 +110,7 @@
       </section>
 
       <footer class="footer">
-        <p class="footer-names reveal">전윤호 <span>&amp;</span> 이수정</p>
+        <p class="footer-names reveal">전윤호 <span class="heart" aria-label="하트">♥</span> 이수정</p>
         <button class="share-button reveal" type="button" data-share>청첩장 링크 공유</button>
         <p class="footer-date">2027. 03. 06</p>
       </footer>

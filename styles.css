@@ -139,11 +139,21 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outlin
 .account-group { padding: 22px 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
 .account-group h3 { margin: 0 0 10px; color: var(--accent); font-size: 16px; font-weight: 400; }
 .account-group p { margin: 0; color: var(--muted); font-size: 13px; }
+.account-list { display: grid; margin-top: 6px; }
+.account-person + .account-person { border-top: 1px solid var(--line); }
+.account-person-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 13px 0; }
+.account-person-header strong { font-size: 14px; font-weight: 400; }
+.account-toggle { flex: none; min-height: 34px; padding: 0 12px; border: 1px solid var(--accent); border-radius: 100px; background: transparent; color: var(--accent); font-size: 12px; cursor: pointer; }
+.account-toggle[aria-expanded='true'] { background: var(--accent); color: white; }
+.account-details { padding: 0 0 18px; }
+.account-details[hidden] { display: none; }
+.account-group .account-number { margin: 7px 0 13px; color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 17px; font-variant-numeric: tabular-nums; }
+.account-copy { min-height: 37px; padding: 0 13px; border: 0; border-radius: 6px; background: var(--accent); color: white; font-size: 12px; cursor: pointer; }
 
 .footer { padding: 86px 28px 42px; text-align: center; background: var(--accent-soft); }
 .footer-message { margin: 0; font-size: 16px; line-height: 2; }
 .footer-names { margin: 27px 0 30px; font-size: 22px; }
-.footer-names span { color: var(--accent); font-family: Georgia, serif; font-style: italic; }
+.footer-names .heart { color: var(--accent); font-family: Georgia, serif; font-size: .75em; }
 .share-button { min-width: 190px; background: transparent; color: var(--accent); }
 .share-button:hover { background: var(--accent); color: white; }
 .footer-date { margin: 64px 0 0; color: var(--muted); font-size: 10px; }

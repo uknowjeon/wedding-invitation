@@ -83,6 +83,43 @@ document.querySelector('[data-share]').addEventListener('click', async () => {
   }
 });
 
+document.querySelectorAll('[data-account-toggle]').forEach((button) => {
+  button.addEventListener('click', () => {
+    const details = document.getElementById(button.getAttribute('aria-controls'));
+    const opening = details.hidden;
+    details.hidden = !opening;
+    button.setAttribute('aria-expanded', String(opening));
+    button.textContent = opening ? '접기' : '계좌 보기';
+  });
+});
+
+async function copyAccountNumber(number) {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(number);
+      return true;
+    }
+  } catch { /* 일부 앱 내 브라우저에서는 다른 복사 방법을 사용합니다. */ }
+  const field = document.createElement('textarea');
+  field.value = number;
+  field.style.position = 'fixed';
+  field.style.opacity = '0';
+  document.body.append(field);
+  field.select();
+  let copied = false;
+  try { copied = document.execCommand('copy'); } catch { /* 복사를 지원하지 않는 브라우저 */ }
+  field.remove();
+  return copied;
+}
+
+document.querySelectorAll('[data-copy-account]').forEach((button) => {
+  button.addEventListener('click', async () => {
+    const copied = await copyAccountNumber(button.dataset.copyAccount);
+    showToast(copied ? '계좌번호를 복사했습니다.' : '계좌번호를 복사하지 못했습니다.');
+    button.focus();
+  });
+});
+
 const lightbox = document.querySelector('#lightbox');
 const lightboxImage = lightbox.querySelector('img');
 const lightboxCaption = lightbox.querySelector('.lightbox-caption');
