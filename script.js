@@ -20,6 +20,34 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
+// 사진을 받으면 이 배열에 { src: './assets/photo-01.jpg', alt: '사진 설명' } 형식으로 추가합니다.
+const galleryPhotos = [];
+const gallery = document.querySelector('[data-gallery]');
+if (galleryPhotos.length === 0) {
+  gallery.classList.add('is-pending');
+  for (let number = 1; number <= 20; number++) {
+    const slot = document.createElement('div');
+    slot.className = 'gallery-slot';
+    slot.setAttribute('aria-hidden', 'true');
+    slot.textContent = String(number).padStart(2, '0');
+    gallery.append(slot);
+  }
+} else {
+  document.querySelector('[data-gallery-subtitle]').textContent = '사진을 눌러 크게 보실 수 있습니다.';
+  galleryPhotos.forEach((photo, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.dataset.galleryItem = '';
+    button.setAttribute('aria-label', `${index + 1}번째 사진 크게 보기`);
+    const image = document.createElement('img');
+    image.src = photo.src;
+    image.alt = photo.alt || `웨딩 사진 ${index + 1}`;
+    image.loading = 'lazy';
+    button.append(image);
+    gallery.append(button);
+  });
+}
+
 const revealNodes = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const observer = new IntersectionObserver((entries) => {
@@ -53,4 +81,36 @@ document.querySelector('[data-share]').addEventListener('click', async () => {
   } catch (error) {
     if (error.name !== 'AbortError') showToast('링크를 복사하지 못했습니다.');
   }
+});
+
+const lightbox = document.querySelector('#lightbox');
+const lightboxImage = lightbox.querySelector('img');
+const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+let lastFocusedGalleryItem = null;
+
+gallery.addEventListener('click', (event) => {
+  const item = event.target.closest('[data-gallery-item]');
+  if (!item) return;
+  const image = item.querySelector('img');
+  lastFocusedGalleryItem = item;
+  lightboxImage.src = image.src;
+  lightboxImage.alt = image.alt;
+  lightboxCaption.textContent = image.alt;
+  lightbox.hidden = false;
+  document.body.style.overflow = 'hidden';
+  lightbox.querySelector('[data-lightbox-close]').focus();
+});
+
+function closeLightbox() {
+  lightbox.hidden = true;
+  lightboxImage.removeAttribute('src');
+  document.body.style.overflow = '';
+  lastFocusedGalleryItem?.focus();
+}
+
+lightbox.addEventListener('click', (event) => {
+  if (event.target === lightbox || event.target.closest('[data-lightbox-close]')) closeLightbox();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !lightbox.hidden) closeLightbox();
 });
