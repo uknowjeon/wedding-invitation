@@ -116,7 +116,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outlin
 .gallery-more[hidden] { display: none; }
 .gallery-more:hover { background: var(--accent-soft); }
 .gallery-more:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.gallery-more-icon { font-size: 19px; line-height: 1; transition: transform .2s ease; }
+.gallery-more-icon { display: grid; place-items: center; flex: none; width: 18px; height: 18px; transition: transform .2s ease; }
+.gallery-more-icon svg { display: block; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .gallery-more.is-expanded .gallery-more-icon { transform: rotate(180deg); }
 
 .venue-name { margin: 28px 0 8px; font-size: 17px; line-height: 1.8; }
@@ -186,7 +187,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outlin
 .lightbox:not([hidden]) { display: flex; flex-direction: column; justify-content: center; align-items: center; }
 .lightbox img { max-width: 100%; max-height: calc(100dvh - 145px); object-fit: contain; user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
 .lightbox-close { position: absolute; z-index: 2; top: max(10px, env(safe-area-inset-top)); right: 18px; border: 0; background: none; color: white; font: 34px Arial, sans-serif; cursor: pointer; }
-.lightbox-nav { position: absolute; z-index: 1; top: 50%; width: 44px; height: 54px; transform: translateY(-50%); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; background: rgba(20, 17, 18, .55); color: white; font: 36px/1 Arial, sans-serif; cursor: pointer; }
+.lightbox-nav { position: absolute; z-index: 1; top: 50%; display: grid; place-items: center; width: 44px; height: 54px; padding: 0; transform: translateY(-50%); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; background: rgba(20, 17, 18, .55); color: white; cursor: pointer; }
+.lightbox-nav[hidden] { display: none; }
+.lightbox-nav svg { display: block; width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
 .lightbox-prev { left: 10px; }
 .lightbox-next { right: 10px; }
 .lightbox-nav:focus-visible, .lightbox-close:focus-visible { outline: 2px solid white; outline-offset: 3px; }
