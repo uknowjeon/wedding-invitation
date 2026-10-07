@@ -12,8 +12,8 @@
     <meta property="og:url" content="https://uknowjeon.github.io/wedding-invitation/" />
     <meta property="og:image" content="https://uknowjeon.github.io/wedding-invitation/assets/illustration.jpg" />
     <title>전윤호 · 이수정 결혼합니다</title>
-    <link rel="stylesheet" href="./styles.css?v=20261007-photos20" />
-    <script src="./script.js?v=20261007-photos20" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20261007-gallery9" />
+    <script src="./script.js?v=20261007-gallery9" defer></script>
   </head>
   <body>
     <div class="petals" aria-hidden="true">
@@ -54,7 +54,10 @@
       <section class="section gallery-section" aria-labelledby="gallery-title">
         <p class="section-kicker reveal">Gallery</p>
         <h2 id="gallery-title" class="section-title reveal">우리의 순간들</h2>
-        <div class="gallery-grid reveal" data-gallery role="group" aria-label="사진 20장 자리"></div>
+        <div class="gallery-grid reveal" id="gallery-grid" data-gallery role="group" aria-label="웨딩 사진 20장"></div>
+        <button class="gallery-more" type="button" data-gallery-more aria-controls="gallery-grid" aria-expanded="false" hidden>
+          <span data-gallery-more-label>사진 11장 더 보기</span><span class="gallery-more-icon" aria-hidden="true">⌄</span>
+        </button>
       </section>
 
       <section class="section location-section" aria-labelledby="location-title">

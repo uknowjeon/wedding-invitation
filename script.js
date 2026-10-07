@@ -29,6 +29,8 @@ const galleryPhotos = Array.from({ length: 20 }, (_, index) => {
   };
 });
 const gallery = document.querySelector('[data-gallery]');
+const galleryMore = document.querySelector('[data-gallery-more]');
+const initialGalleryCount = 9;
 if (galleryPhotos.length === 0) {
   gallery.classList.add('is-pending');
   for (let number = 1; number <= 20; number++) {
@@ -44,6 +46,10 @@ if (galleryPhotos.length === 0) {
     button.type = 'button';
     button.dataset.galleryItem = '';
     button.dataset.galleryIndex = String(index);
+    if (index >= initialGalleryCount) {
+      button.dataset.galleryExtra = '';
+      button.hidden = true;
+    }
     button.setAttribute('aria-label', `${index + 1}번째 사진 크게 보기`);
     const image = document.createElement('img');
     image.src = photo.thumb || photo.src;
@@ -53,7 +59,20 @@ if (galleryPhotos.length === 0) {
     button.append(image);
     gallery.append(button);
   });
+  if (galleryPhotos.length > initialGalleryCount) {
+    galleryMore.hidden = false;
+    galleryMore.querySelector('[data-gallery-more-label]').textContent = `사진 ${galleryPhotos.length - initialGalleryCount}장 더 보기`;
+  }
 }
+
+galleryMore.addEventListener('click', () => {
+  const expanded = galleryMore.getAttribute('aria-expanded') !== 'true';
+  gallery.querySelectorAll('[data-gallery-extra]').forEach((item) => { item.hidden = !expanded; });
+  galleryMore.setAttribute('aria-expanded', String(expanded));
+  galleryMore.classList.toggle('is-expanded', expanded);
+  galleryMore.querySelector('[data-gallery-more-label]').textContent = expanded
+    ? '사진 접기' : `사진 ${galleryPhotos.length - initialGalleryCount}장 더 보기`;
+});
 
 const revealNodes = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
