@@ -33,7 +33,6 @@ if (galleryPhotos.length === 0) {
     gallery.append(slot);
   }
 } else {
-  document.querySelector('[data-gallery-subtitle]').textContent = '사진을 눌러 크게 보실 수 있습니다.';
   galleryPhotos.forEach((photo, index) => {
     const button = document.createElement('button');
     button.type = 'button';
