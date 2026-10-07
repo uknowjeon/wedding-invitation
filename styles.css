@@ -105,6 +105,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outlin
 .gallery-pending { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px; height: 360px; margin-top: 30px; border-radius: 18px; background: linear-gradient(135deg, var(--accent-soft), var(--photo)); color: var(--accent); }
 .gallery-pending-mark { font-size: 48px; }
 .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 30px; }
+.gallery-grid.is-pending { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; }
+.gallery-slot { display: grid; place-items: center; aspect-ratio: 1; border: 1px solid var(--line); border-radius: 8px; background: linear-gradient(145deg, var(--card), var(--accent-soft)); color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: .08em; }
 .gallery-grid button { border: 0; padding: 0; background: none; cursor: pointer; overflow: hidden; border-radius: 12px; aspect-ratio: 4 / 5; }
 .gallery-grid button:first-child { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
 .gallery-grid img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
@@ -133,6 +135,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outlin
 .account-card { margin-top: 15px; padding: 18px; border: 1px solid var(--line); border-radius: 10px; text-align: left; }
 .account-card strong { display: block; margin-bottom: 12px; font-weight: 400; }
 .account-card button { border: 0; padding: 0; background: none; color: var(--accent); cursor: pointer; }
+.account-groups { display: grid; gap: 12px; margin-top: 30px; text-align: left; }
+.account-group { padding: 22px 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+.account-group h3 { margin: 0 0 10px; color: var(--accent); font-size: 16px; font-weight: 400; }
+.account-group p { margin: 0; color: var(--muted); font-size: 13px; }
 
 .footer { padding: 86px 28px 42px; text-align: center; background: var(--accent-soft); }
 .footer-message { margin: 0; font-size: 16px; line-height: 2; }
