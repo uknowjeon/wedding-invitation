@@ -51,6 +51,13 @@
         </div>
       </section>
 
+      <section class="section gallery-section" aria-labelledby="gallery-title">
+        <p class="section-kicker reveal">Gallery</p>
+        <h2 id="gallery-title" class="section-title reveal">우리의 순간들</h2>
+        <p class="section-subtitle reveal" data-gallery-subtitle>약 20장의 사진을 담을 공간을 준비 중입니다.</p>
+        <div class="gallery-grid reveal" data-gallery role="group" aria-label="사진 20장 자리"></div>
+      </section>
+
       <section class="section location-section" aria-labelledby="location-title">
         <p class="section-kicker reveal">Location</p>
         <h2 id="location-title" class="section-title reveal">오시는 길</h2>
@@ -68,12 +75,35 @@
         </div>
       </section>
 
+      <section class="section account-section" aria-labelledby="account-title">
+        <p class="section-kicker reveal">Account</p>
+        <h2 id="account-title" class="section-title reveal">마음 전하실 곳</h2>
+        <p class="section-subtitle reveal">양가 계좌 안내를 이곳에 담을 예정입니다.</p>
+        <div class="account-groups">
+          <div class="account-group reveal" data-account-side="groom">
+            <h3>신랑측</h3>
+            <p>계좌 정보 준비 중</p>
+            <div class="account-list" data-account-list="groom"></div>
+          </div>
+          <div class="account-group reveal" data-account-side="bride">
+            <h3>신부측</h3>
+            <p>계좌 정보 준비 중</p>
+            <div class="account-list" data-account-list="bride"></div>
+          </div>
+        </div>
+      </section>
+
       <footer class="footer">
         <p class="footer-names reveal">전윤호 <span>&amp;</span> 이수정</p>
         <button class="share-button reveal" type="button" data-share>청첩장 링크 공유</button>
         <p class="footer-date">2027. 03. 06</p>
       </footer>
     </main>
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기" hidden>
+      <button type="button" class="lightbox-close" data-lightbox-close aria-label="사진 닫기">×</button>
+      <img src="" alt="" />
+      <p class="lightbox-caption"></p>
+    </div>
     <div class="toast" role="status" aria-live="polite"></div>
   </body>
 </html>
