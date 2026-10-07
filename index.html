@@ -27,9 +27,9 @@
         <h1 id="hero-title" class="hero-names reveal">
           <span>전윤호</span><span class="heart" aria-label="하트">♥</span><span>이수정</span>
         </h1>
-        <div class="hero-photo reveal">
+        <button class="hero-photo reveal" type="button" data-gallery-item aria-label="대표 이미지 전체화면으로 보기">
           <img src="./assets/illustration.jpg" alt="신랑과 신부가 나란히 선 웨딩 일러스트" fetchpriority="high" decoding="async" />
-        </div>
+        </button>
         <p class="hero-date reveal">2027년 3월 6일 토요일 오후 3시</p>
         <p class="hero-place reveal">고려대학교 교우회관 · 웨드유 웨딩</p>
       </section>
@@ -117,7 +117,7 @@
     </main>
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기" hidden>
       <button type="button" class="lightbox-close" data-lightbox-close aria-label="사진 닫기">×</button>
-      <img src="" alt="" />
+      <img src="" alt="" draggable="false" />
       <p class="lightbox-caption"></p>
     </div>
     <div class="toast" role="status" aria-live="polite"></div>

@@ -94,14 +94,15 @@ document.querySelectorAll('[data-account-toggle]').forEach((button) => {
 });
 
 async function copyAccountNumber(number) {
+  const digitsOnly = number.replace(/\D/g, '');
   try {
     if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(number);
+      await navigator.clipboard.writeText(digitsOnly);
       return true;
     }
   } catch { /* 일부 앱 내 브라우저에서는 다른 복사 방법을 사용합니다. */ }
   const field = document.createElement('textarea');
-  field.value = number;
+  field.value = digitsOnly;
   field.style.position = 'fixed';
   field.style.opacity = '0';
   document.body.append(field);
@@ -115,7 +116,7 @@ async function copyAccountNumber(number) {
 document.querySelectorAll('[data-copy-account]').forEach((button) => {
   button.addEventListener('click', async () => {
     const copied = await copyAccountNumber(button.dataset.copyAccount);
-    showToast(copied ? '계좌번호를 복사했습니다.' : '계좌번호를 복사하지 못했습니다.');
+    showToast(copied ? '계좌번호 숫자만 복사했습니다.' : '계좌번호를 복사하지 못했습니다.');
     button.focus();
   });
 });
@@ -125,10 +126,11 @@ const lightboxImage = lightbox.querySelector('img');
 const lightboxCaption = lightbox.querySelector('.lightbox-caption');
 let lastFocusedGalleryItem = null;
 
-gallery.addEventListener('click', (event) => {
+document.addEventListener('click', (event) => {
   const item = event.target.closest('[data-gallery-item]');
   if (!item) return;
   const image = item.querySelector('img');
+  if (!image) return;
   lastFocusedGalleryItem = item;
   lightboxImage.src = image.src;
   lightboxImage.alt = image.alt;
@@ -136,9 +138,11 @@ gallery.addEventListener('click', (event) => {
   lightbox.hidden = false;
   document.body.style.overflow = 'hidden';
   lightbox.querySelector('[data-lightbox-close]').focus();
+  if (lightbox.requestFullscreen) lightbox.requestFullscreen().catch(() => {});
 });
 
 function closeLightbox() {
+  if (document.fullscreenElement === lightbox) document.exitFullscreen().catch(() => {});
   lightbox.hidden = true;
   lightboxImage.removeAttribute('src');
   document.body.style.overflow = '';
@@ -151,3 +155,10 @@ lightbox.addEventListener('click', (event) => {
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && !lightbox.hidden) closeLightbox();
 });
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement && !lightbox.hidden) closeLightbox();
+});
+lightbox.addEventListener('dblclick', (event) => event.preventDefault());
+lightbox.addEventListener('gesturestart', (event) => event.preventDefault());
+lightbox.addEventListener('touchmove', (event) => event.preventDefault(), { passive: false });
+lightbox.addEventListener('contextmenu', (event) => event.preventDefault());
