@@ -37,6 +37,7 @@ if (galleryPhotos.length === 0) {
     const button = document.createElement('button');
     button.type = 'button';
     button.dataset.galleryItem = '';
+    button.dataset.galleryIndex = String(index);
     button.setAttribute('aria-label', `${index + 1}번째 사진 크게 보기`);
     const image = document.createElement('img');
     image.src = photo.src;
@@ -123,40 +124,73 @@ document.querySelectorAll('[data-copy-account]').forEach((button) => {
 const lightbox = document.querySelector('#lightbox');
 const lightboxImage = lightbox.querySelector('img');
 const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+const lightboxCount = lightbox.querySelector('.lightbox-count');
 let lastFocusedGalleryItem = null;
+let currentGalleryIndex = -1;
 
-document.addEventListener('click', (event) => {
+function showGalleryPhoto(index) {
+  if (!galleryPhotos.length) return;
+  currentGalleryIndex = (index + galleryPhotos.length) % galleryPhotos.length;
+  const photo = galleryPhotos[currentGalleryIndex];
+  const description = photo.alt || `웨딩 사진 ${currentGalleryIndex + 1}`;
+  lightboxImage.src = photo.src;
+  lightboxImage.alt = description;
+  lightboxCaption.textContent = description;
+  lightboxCount.textContent = `${currentGalleryIndex + 1} / ${galleryPhotos.length}`;
+}
+
+gallery.addEventListener('click', (event) => {
   const item = event.target.closest('[data-gallery-item]');
   if (!item) return;
-  const image = item.querySelector('img');
-  if (!image) return;
+  const index = Number(item.dataset.galleryIndex);
+  if (!Number.isInteger(index) || index < 0 || index >= galleryPhotos.length) return;
   lastFocusedGalleryItem = item;
-  lightboxImage.src = image.src;
-  lightboxImage.alt = image.alt;
-  lightboxCaption.textContent = image.alt;
+  showGalleryPhoto(index);
   lightbox.hidden = false;
   document.body.style.overflow = 'hidden';
+  lightbox.querySelectorAll('.lightbox-nav').forEach((button) => { button.hidden = galleryPhotos.length < 2; });
   lightbox.querySelector('[data-lightbox-close]').focus();
   if (lightbox.requestFullscreen) lightbox.requestFullscreen().catch(() => {});
 });
 
 function closeLightbox() {
+  if (lightbox.hidden) return;
   if (document.fullscreenElement === lightbox) document.exitFullscreen().catch(() => {});
   lightbox.hidden = true;
   lightboxImage.removeAttribute('src');
   document.body.style.overflow = '';
   lastFocusedGalleryItem?.focus();
+  currentGalleryIndex = -1;
 }
 
 lightbox.addEventListener('click', (event) => {
-  if (event.target === lightbox || event.target.closest('[data-lightbox-close]')) closeLightbox();
+  if (event.target.closest('[data-lightbox-prev]')) showGalleryPhoto(currentGalleryIndex - 1);
+  else if (event.target.closest('[data-lightbox-next]')) showGalleryPhoto(currentGalleryIndex + 1);
+  else if (event.target === lightbox || event.target.closest('[data-lightbox-close]')) closeLightbox();
 });
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && !lightbox.hidden) closeLightbox();
+  if (lightbox.hidden) return;
+  if (event.key === 'Escape') closeLightbox();
+  else if (event.key === 'ArrowLeft') { event.preventDefault(); showGalleryPhoto(currentGalleryIndex - 1); }
+  else if (event.key === 'ArrowRight') { event.preventDefault(); showGalleryPhoto(currentGalleryIndex + 1); }
 });
 document.addEventListener('fullscreenchange', () => {
   if (!document.fullscreenElement && !lightbox.hidden) closeLightbox();
 });
+let touchStart = null;
+lightbox.addEventListener('touchstart', (event) => {
+  touchStart = event.touches.length === 1 ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null;
+}, { passive: true });
+lightbox.addEventListener('touchend', (event) => {
+  if (!touchStart || lightbox.hidden || event.changedTouches.length !== 1) return;
+  const dx = event.changedTouches[0].clientX - touchStart.x;
+  const dy = event.changedTouches[0].clientY - touchStart.y;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+    showGalleryPhoto(currentGalleryIndex + (dx < 0 ? 1 : -1));
+  }
+  touchStart = null;
+}, { passive: true });
+lightbox.addEventListener('touchcancel', () => { touchStart = null; });
 lightbox.addEventListener('dblclick', (event) => event.preventDefault());
 lightbox.addEventListener('gesturestart', (event) => event.preventDefault());
 lightbox.addEventListener('touchmove', (event) => event.preventDefault(), { passive: false });

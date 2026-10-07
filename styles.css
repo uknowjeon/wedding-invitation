@@ -56,8 +56,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outlin
 .eyebrow { margin: 0 0 23px; color: var(--accent); font-size: 11px; }
 .hero-names { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 0 29px; font-size: clamp(32px, 8vw, 40px); line-height: 1.4; font-weight: 400; letter-spacing: .02em; }
 .hero-names .heart { color: var(--accent); font-family: Georgia, serif; font-size: .58em; }
-.hero-photo { display: block; width: 100%; aspect-ratio: .72; padding: 0; border: 0; border-radius: 22px; overflow: hidden; background: transparent; cursor: zoom-in; }
-.hero-photo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.hero-photo { display: block; width: 100%; aspect-ratio: .72; border-radius: 22px; overflow: hidden; }
 .hero-photo img { display: block; width: 100%; height: 100%; object-fit: contain; background: #fbfaf7; }
 .photo-pending { display: grid; place-items: center; background: linear-gradient(145deg, var(--photo), var(--accent-soft) 55%, #fbf5f2); }
 .photo-pending-content { display: flex; flex-direction: column; align-items: center; gap: 22px; color: var(--accent); }
@@ -112,6 +111,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outlin
 .gallery-grid button:first-child { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
 .gallery-grid img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
 .gallery-grid button:hover img { transform: scale(1.04); }
+.gallery-grid button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 .venue-name { margin: 28px 0 8px; font-size: 17px; line-height: 1.8; }
 .venue-name strong { font-size: 23px; font-weight: 400; }
@@ -178,9 +178,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outlin
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 .lightbox { position: fixed; z-index: 80; inset: 0; padding: 54px 16px 22px; background: #141112; color: white; text-align: center; overflow: hidden; overscroll-behavior: contain; touch-action: none; }
 .lightbox:not([hidden]) { display: flex; flex-direction: column; justify-content: center; align-items: center; }
-.lightbox img { max-width: 100%; max-height: calc(100dvh - 110px); object-fit: contain; user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
-.lightbox-close { position: absolute; top: 10px; right: 18px; border: 0; background: none; color: white; font: 34px Arial, sans-serif; cursor: pointer; }
+.lightbox img { max-width: 100%; max-height: calc(100dvh - 145px); object-fit: contain; user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
+.lightbox-close { position: absolute; z-index: 2; top: max(10px, env(safe-area-inset-top)); right: 18px; border: 0; background: none; color: white; font: 34px Arial, sans-serif; cursor: pointer; }
+.lightbox-nav { position: absolute; z-index: 1; top: 50%; width: 44px; height: 54px; transform: translateY(-50%); border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; background: rgba(20, 17, 18, .55); color: white; font: 36px/1 Arial, sans-serif; cursor: pointer; }
+.lightbox-prev { left: 10px; }
+.lightbox-next { right: 10px; }
+.lightbox-nav:focus-visible, .lightbox-close:focus-visible { outline: 2px solid white; outline-offset: 3px; }
 .lightbox-caption { margin: 12px 0 0; font-size: 13px; }
+.lightbox-count { margin: 8px 0 0; color: rgba(255, 255, 255, .72); font: 12px 'DM Sans', sans-serif; letter-spacing: .15em; }
 
 @media (min-width: 700px) { .draft-tools { width: 440px; } }
 @media (max-width: 360px) { .hero { padding-left: 19px; padding-right: 19px; } .hero-names { font-size: 31px; gap: 7px; } .section { padding-left: 22px; padding-right: 22px; } .draft-pill { font-size: 9px; } .palette-picker button { padding: 6px 7px; } }
