@@ -20,8 +20,14 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// 사진을 받으면 이 배열에 { src: './assets/photo-01.jpg', alt: '사진 설명' } 형식으로 추가합니다.
-const galleryPhotos = [];
+const galleryPhotos = Array.from({ length: 20 }, (_, index) => {
+  const number = String(index + 1).padStart(2, '0');
+  return {
+    src: `./assets/gallery/photo-${number}.webp`,
+    thumb: `./assets/gallery/photo-${number}-thumb.webp`,
+    alt: `웨딩 사진 ${index + 1}`,
+  };
+});
 const gallery = document.querySelector('[data-gallery]');
 if (galleryPhotos.length === 0) {
   gallery.classList.add('is-pending');
@@ -40,9 +46,10 @@ if (galleryPhotos.length === 0) {
     button.dataset.galleryIndex = String(index);
     button.setAttribute('aria-label', `${index + 1}번째 사진 크게 보기`);
     const image = document.createElement('img');
-    image.src = photo.src;
+    image.src = photo.thumb || photo.src;
     image.alt = photo.alt || `웨딩 사진 ${index + 1}`;
     image.loading = 'lazy';
+    image.decoding = 'async';
     button.append(image);
     gallery.append(button);
   });
@@ -135,8 +142,12 @@ function showGalleryPhoto(index) {
   const description = photo.alt || `웨딩 사진 ${currentGalleryIndex + 1}`;
   lightboxImage.src = photo.src;
   lightboxImage.alt = description;
-  lightboxCaption.textContent = description;
+  lightboxCaption.textContent = photo.caption || '';
   lightboxCount.textContent = `${currentGalleryIndex + 1} / ${galleryPhotos.length}`;
+  [-1, 1].forEach((offset) => {
+    const preload = new Image();
+    preload.src = galleryPhotos[(currentGalleryIndex + offset + galleryPhotos.length) % galleryPhotos.length].src;
+  });
 }
 
 gallery.addEventListener('click', (event) => {

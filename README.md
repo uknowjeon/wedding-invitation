@@ -6,7 +6,7 @@
 
 ## 사진과 계좌 안내 채우기
 
-- `script.js`의 `galleryPhotos` 배열에 `{ src: './assets/photo-01.jpg', alt: '사진 설명' }` 형식으로 사진을 순서대로 추가합니다. 배열이 비어 있는 동안은 사진 20장의 자리만 표시됩니다. 실제 사진을 넣으면 사진을 크게 볼 수 있습니다.
+- 선택한 20장의 사진을 파일명 순서로 정렬해 `assets/gallery/`에 담았습니다. `photo-01.webp`부터 `photo-20.webp`까지는 전체화면용이고, `-thumb.webp` 파일은 목록용입니다. 원본 사진은 저장소에 올리지 않았습니다.
 - `index.html`의 `data-account-list="groom"`, `data-account-list="bride"` 영역에 확인된 계좌를 추가합니다. 은행, 계좌번호, 예금주를 확인하고 해당 명의자의 동의를 받은 뒤 공개합니다.
 
 GitHub Pages: Settings → Pages → Deploy from a branch → main / (root)

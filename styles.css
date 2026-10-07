@@ -108,7 +108,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outlin
 .gallery-grid.is-pending { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; }
 .gallery-slot { display: grid; place-items: center; aspect-ratio: 1; border: 1px solid var(--line); border-radius: 8px; background: linear-gradient(145deg, var(--card), var(--accent-soft)); color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: .08em; }
 .gallery-grid button { border: 0; padding: 0; background: none; cursor: pointer; overflow: hidden; border-radius: 12px; aspect-ratio: 4 / 5; }
-.gallery-grid button:first-child { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+.gallery-grid button:first-child { grid-column: 1 / -1; aspect-ratio: 4 / 5; }
 .gallery-grid img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
 .gallery-grid button:hover img { transform: scale(1.04); }
 .gallery-grid button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -185,6 +185,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outlin
 .lightbox-next { right: 10px; }
 .lightbox-nav:focus-visible, .lightbox-close:focus-visible { outline: 2px solid white; outline-offset: 3px; }
 .lightbox-caption { margin: 12px 0 0; font-size: 13px; }
+.lightbox-caption:empty { display: none; }
 .lightbox-count { margin: 8px 0 0; color: rgba(255, 255, 255, .72); font: 12px 'DM Sans', sans-serif; letter-spacing: .15em; }
 
 @media (min-width: 700px) { .draft-tools { width: 440px; } }
