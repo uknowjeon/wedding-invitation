@@ -55,7 +55,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outlin
 .eyebrow, .section-kicker, .family-label, .countdown span, .footer-date { font-family: 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: .25em; }
 .eyebrow { margin: 0 0 23px; color: var(--accent); font-size: 11px; }
 .hero-names { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 0 29px; font-size: clamp(32px, 8vw, 40px); line-height: 1.4; font-weight: 400; letter-spacing: .02em; }
-.hero-names .ampersand { color: var(--accent); font-size: .7em; font-style: italic; }
+.hero-names .heart { color: var(--accent); font-family: Georgia, serif; font-size: .58em; }
 .hero-photo { width: 100%; aspect-ratio: .72; border-radius: 22px; overflow: hidden; }
 .hero-photo img { display: block; width: 100%; height: 100%; object-fit: contain; background: #fbfaf7; }
 .photo-pending { display: grid; place-items: center; background: linear-gradient(145deg, var(--photo), var(--accent-soft) 55%, #fbf5f2); }
